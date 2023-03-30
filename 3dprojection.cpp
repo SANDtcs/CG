@@ -23,7 +23,9 @@ GLfloat vertices[8][3]={
     {1.0, 1.0, -1.0},    {1.0, -1.0, -1.0}
 };
 
-
+GLfloat vertices2[5][3]={
+    {0.0, 2.0, 0.0},{-2.0,-2.0,-2.0},{2.0,-2.0,-2.0},{2.0,-2.0,2.0},{-2.0,-2.0,2.0}
+};
 
 GLfloat colors[8][3]={
     {0.0, 0.0, 0.0},{1.0, 0.0, 0.0},
@@ -42,7 +44,13 @@ void quad(int a, int b, int c, int d)
     glEnd();
 }
 
-
+void tri(int a,int b,int c){
+    glBegin(GL_TRIANGLES);
+        glVertex3fv(vertices2[a]);
+        glVertex3fv(vertices2[b]);
+        glVertex3fv(vertices2[c]);
+    glEnd();
+}
 
 void mydraw()
 {
@@ -56,6 +64,16 @@ void mydraw()
 }
 
 
+void drawPyramid(){
+    //glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+    glColor3f(1.0,0.0,0.0);
+    glColor3fv(colors[5]);     quad(1,2,3,4);
+    glColor3fv(colors[6]);     tri(0,1,2);
+    glColor3fv(colors[7]);     tri(0,2,3);
+    glColor3fv(colors[3]);     tri(0,3,4);
+    glColor3fv(colors[4]);     tri(0,1,4);
+
+}
 
 
 void drawObject()
@@ -108,6 +126,7 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //mydraw();
     //drawObject();
+    drawPyramid();
     glutSwapBuffers();
 }
 
